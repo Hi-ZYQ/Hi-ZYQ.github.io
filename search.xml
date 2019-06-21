@@ -13,17 +13,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Linux笔记]]></title>
-    <url>%2F2019%2F06%2F19%2FLinux%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[批量安装rpm包1rpm -ivh mysql-* 查询进程 1ps -ef |grep tomcat]]></content>
-      <categories>
-        <category>CentOS7</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[MySQL安装后配置]]></title>
     <url>%2F2019%2F06%2F19%2FMySQL%E5%AE%89%E8%A3%85%E5%90%8E%E9%85%8D%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[首先查看是否只允许本地连接 1cat /var/log/mysqld.log | grep password 1mysql -u root -p 1select user,host from user; localhost代表只允许本地连接不允许其他地址链接我们要修改成% 切换mysql数据库 1use mysql; 如果是刚刚装的数据没有修改过密码就要更改密码之后在操作 1ALTER USER USER() IDENTIFIED BY 'VodeDB@110'; 修改host值()此处不修改除本机其他地址链接时会出现10038,%代表其他地址 123update user set host = '%' where user = 'root';--刷新flush privileges; ###查看host值 1select user,host from user; 更改加密方式(可不做此操作)这里上面host是%我们就用&#39;root&#39;@&#39;%&#39;,是localhost我们就用&#39;root&#39;@&#39;localhost&#39; 1alter user 'root'@'%' identified by 'VodeDB@110' password expire never; 密码一定要符合规则否则出现ERROR 1819 (HY000): Your password does not satisfy the current policy requirements 更新密码更改过host值之后必须更新密码,如果不更新会有1251错误出现 1alter user 'root'@'%' identified with mysql_native_password by 'VodeDB@110'; 12--刷新flush privileges;]]></content>
@@ -33,6 +22,17 @@
       <tags>
         <tag>Linux</tag>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux笔记]]></title>
+    <url>%2F2019%2F06%2F19%2FLinux%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[批量安装rpm包1rpm -ivh mysql-* 查询进程 1ps -ef |grep tomcat]]></content>
+      <categories>
+        <category>CentOS7</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>
