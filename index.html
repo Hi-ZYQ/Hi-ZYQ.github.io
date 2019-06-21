@@ -261,6 +261,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.plowcow.cn/2019/06/19/Linux下安装MySQL8.0.16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="勤奋的牛">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cow.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="勤奋的牛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/Linux下安装MySQL8.0.16/" itemprop="url">Linux下安装MySQL8.0.16</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T16:41:28+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS7/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS7</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/19/Linux下安装MySQL8.0.16/" class="leancloud_visitors" data-flag-title="Linux下安装MySQL8.0.16">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>引用<a href="https://www.cnblogs.com/LUA123/p/10914712.html" target="_blank" rel="noopener">Linux安装以及使用</a></p>
+<ul>
+<li><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>安装时有需要配置忽略大小写一定要在第一次启动前配置</p>
+<p><a href="https://bugs.mysql.com/bug.php?id=90695" target="_blank" rel="noopener">MySQL8忽略大小写</a></p>
+</li>
+</ul>
+<h2 id="查找安装路径"><a href="#查找安装路径" class="headerlink" title="查找安装路径"></a>查找安装路径</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">[root@root ~]# rpm -qa|grep mysql</span><br><span class="line">mysql-community-client-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-libs-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-libs-compat-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-common-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-server-8.0.16-2.el7.x86_64</span><br><span class="line"></span><br><span class="line">[root@root ~]# rpm -ql mysql-community-server-8.0.16-2.el7.x86_64</span><br><span class="line">/etc/logrotate.d/mysql</span><br><span class="line">/etc/my.cnf</span><br><span class="line">/etc/my.cnf.d</span><br><span class="line">/usr/bin/ibd2sdi</span><br><span class="line">/usr/bin/innochecksum</span><br><span class="line">/usr/bin/lz4_decompress</span><br><span class="line">/usr/bin/my_print_defaults</span><br><span class="line">/usr/bin/myisam_ftdump</span><br><span class="line">/usr/bin/myisamchk</span><br><span class="line">/usr/bin/myisamlog</span><br><span class="line">/usr/bin/myisampack</span><br><span class="line">/usr/bin/mysql_secure_installation</span><br><span class="line">/usr/bin/mysql_ssl_rsa_setup</span><br><span class="line">/usr/bin/mysql_tzinfo_to_sql</span><br><span class="line">/usr/bin/mysql_upgrade</span><br><span class="line">/usr/bin/mysqld_pre_systemd</span><br><span class="line">/usr/bin/mysqldumpslow</span><br><span class="line">/usr/bin/perror</span><br><span class="line">/usr/bin/zlib_decompress</span><br><span class="line">/usr/lib/systemd/system/mysqld.service</span><br><span class="line">/usr/lib/systemd/system/mysqld@.service</span><br><span class="line">/usr/lib/tmpfiles.d/mysql.conf</span><br><span class="line">/usr/lib64/mysql/mecab</span><br><span class="line">/usr/lib64/mysql/mecab/dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/etc</span><br><span class="line">/usr/lib64/mysql/mecab/etc/mecabrc</span><br><span class="line">/usr/lib64/mysql/plugin</span><br><span class="line">/usr/lib64/mysql/plugin/adt_null.so</span><br><span class="line">/usr/lib64/mysql/plugin/auth_socket.so</span><br><span class="line">/usr/lib64/mysql/plugin/authentication_ldap_sasl_client.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_audit_api_message_emit.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_filter_dragnet.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_sink_json.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_sink_syseventlog.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/connection_control.so</span><br><span class="line">/usr/lib64/mysql/plugin/ddl_rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug</span><br><span class="line">/usr/lib64/mysql/plugin/debug/adt_null.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/auth_socket.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/authentication_ldap_sasl_client.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_audit_api_message_emit.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_filter_dragnet.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_sink_json.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_sink_syseventlog.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/connection_control.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ddl_rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/group_replication.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ha_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ha_mock.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/innodb_engine.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/keyring_file.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/keyring_udf.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/libmemcached.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/libpluginmecab.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/locking_service.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/mypluglib.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/mysql_no_login.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/rewrite_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/semisync_master.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/semisync_slave.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/version_token.so</span><br><span class="line">/usr/lib64/mysql/plugin/group_replication.so</span><br><span class="line">/usr/lib64/mysql/plugin/ha_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/ha_mock.so</span><br><span class="line">/usr/lib64/mysql/plugin/innodb_engine.so</span><br><span class="line">/usr/lib64/mysql/plugin/keyring_file.so</span><br><span class="line">/usr/lib64/mysql/plugin/keyring_udf.so</span><br><span class="line">/usr/lib64/mysql/plugin/libmemcached.so</span><br><span class="line">/usr/lib64/mysql/plugin/libpluginmecab.so</span><br><span class="line">/usr/lib64/mysql/plugin/locking_service.so</span><br><span class="line">/usr/lib64/mysql/plugin/mypluglib.so</span><br><span class="line">/usr/lib64/mysql/plugin/mysql_no_login.so</span><br><span class="line">/usr/lib64/mysql/plugin/rewrite_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_master.so</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_slave.so</span><br><span class="line">/usr/lib64/mysql/plugin/validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/version_token.so</span><br><span class="line">/usr/sbin/mysqld</span><br><span class="line">/usr/sbin/mysqld-debug</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/INFO_BIN</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/INFO_SRC</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/LICENSE</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/README</span><br><span class="line">/usr/share/man/man1/ibd2sdi.1.gz</span><br><span class="line">/usr/share/man/man1/innochecksum.1.gz</span><br><span class="line">/usr/share/man/man1/lz4_decompress.1.gz</span><br><span class="line">/usr/share/man/man1/my_print_defaults.1.gz</span><br><span class="line">/usr/share/man/man1/myisam_ftdump.1.gz</span><br><span class="line">/usr/share/man/man1/myisamchk.1.gz</span><br><span class="line">/usr/share/man/man1/myisamlog.1.gz</span><br><span class="line">/usr/share/man/man1/myisampack.1.gz</span><br><span class="line">/usr/share/man/man1/mysql.server.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_secure_installation.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_ssl_rsa_setup.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_tzinfo_to_sql.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_upgrade.1.gz</span><br><span class="line">/usr/share/man/man1/mysqldumpslow.1.gz</span><br><span class="line">/usr/share/man/man1/mysqlman.1.gz</span><br><span class="line">/usr/share/man/man1/perror.1.gz</span><br><span class="line">/usr/share/man/man1/zlib_decompress.1.gz</span><br><span class="line">/usr/share/man/man8/mysqld.8.gz</span><br><span class="line">/usr/share/mysql-8.0/dictionary.txt</span><br><span class="line">/usr/share/mysql-8.0/innodb_memcached_config.sql</span><br><span class="line">/usr/share/mysql-8.0/install_rewriter.sql</span><br><span class="line">/usr/share/mysql-8.0/mysql-log-rotate</span><br><span class="line">/usr/share/mysql-8.0/uninstall_rewriter.sql</span><br><span class="line">/var/lib/mysql</span><br><span class="line">/var/lib/mysql-files</span><br><span class="line">/var/lib/mysql-keyring</span><br><span class="line">/var/run/mysqld</span><br><span class="line">[root@root ~]#</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看端口是否开放"><a href="#查看端口是否开放" class="headerlink" title="查看端口是否开放"></a>查看端口是否开放</h2><h4 id="查看端口是否开放-1"><a href="#查看端口是否开放-1" class="headerlink" title="查看端口是否开放"></a>查看端口是否开放</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port=3306/tcp --zone=public</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回no即未开启，显示yes为已开启。"><a href="#返回no即未开启，显示yes为已开启。" class="headerlink" title="返回no即未开启，显示yes为已开启。"></a>返回no即未开启，显示yes为已开启。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@voda ~]# firewall-cmd --query-port=3306/tcp --zone=public </span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h3 id="重新加载"><a href="#重新加载" class="headerlink" title="重新加载"></a>重新加载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看已经打开的端口"><a href="#查看已经打开的端口" class="headerlink" title="查看已经打开的端口"></a>查看已经打开的端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@voda ~]# firewall-cmd --query-port=3306/tcp --zone=public</span><br><span class="line">FirewallD is not running</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>说明防火墙没有开启</span><br></pre></td></tr></table></figure>
+
+<h4 id="防火墙操作命令"><a href="#防火墙操作命令" class="headerlink" title="防火墙操作命令"></a>防火墙操作命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld  #查看firewalld状态</span><br><span class="line">systemctl stop  firewalld   #停止firewalld</span><br><span class="line">systemctl start firewalld   #开启firewalld</span><br><span class="line">systemctl enable firewalld  #开机自启动</span><br><span class="line">systemctl disable firewalld #禁止自启动</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.plowcow.cn/2019/06/19/Linux笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -576,181 +751,6 @@
 
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.plowcow.cn/2019/06/19/Linux下安装MySQL8.0.16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="勤奋的牛">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/cow.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="勤奋的牛">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/19/Linux下安装MySQL8.0.16/" itemprop="url">Linux下安装MySQL8.0.16</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T16:41:28+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CentOS7/" itemprop="url" rel="index">
-                    <span itemprop="name">CentOS7</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/06/19/Linux下安装MySQL8.0.16/" class="leancloud_visitors" data-flag-title="Linux下安装MySQL8.0.16">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <hr>
-<p>引用<a href="https://www.cnblogs.com/LUA123/p/10914712.html" target="_blank" rel="noopener">Linux安装以及使用</a></p>
-<ul>
-<li><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>安装时有需要配置忽略大小写一定要在第一次启动前配置</p>
-<p><a href="https://bugs.mysql.com/bug.php?id=90695" target="_blank" rel="noopener">MySQL8忽略大小写</a></p>
-</li>
-</ul>
-<h2 id="查找安装路径"><a href="#查找安装路径" class="headerlink" title="查找安装路径"></a>查找安装路径</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">[root@root ~]# rpm -qa|grep mysql</span><br><span class="line">mysql-community-client-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-libs-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-libs-compat-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-common-8.0.16-2.el7.x86_64</span><br><span class="line">mysql-community-server-8.0.16-2.el7.x86_64</span><br><span class="line"></span><br><span class="line">[root@root ~]# rpm -ql mysql-community-server-8.0.16-2.el7.x86_64</span><br><span class="line">/etc/logrotate.d/mysql</span><br><span class="line">/etc/my.cnf</span><br><span class="line">/etc/my.cnf.d</span><br><span class="line">/usr/bin/ibd2sdi</span><br><span class="line">/usr/bin/innochecksum</span><br><span class="line">/usr/bin/lz4_decompress</span><br><span class="line">/usr/bin/my_print_defaults</span><br><span class="line">/usr/bin/myisam_ftdump</span><br><span class="line">/usr/bin/myisamchk</span><br><span class="line">/usr/bin/myisamlog</span><br><span class="line">/usr/bin/myisampack</span><br><span class="line">/usr/bin/mysql_secure_installation</span><br><span class="line">/usr/bin/mysql_ssl_rsa_setup</span><br><span class="line">/usr/bin/mysql_tzinfo_to_sql</span><br><span class="line">/usr/bin/mysql_upgrade</span><br><span class="line">/usr/bin/mysqld_pre_systemd</span><br><span class="line">/usr/bin/mysqldumpslow</span><br><span class="line">/usr/bin/perror</span><br><span class="line">/usr/bin/zlib_decompress</span><br><span class="line">/usr/lib/systemd/system/mysqld.service</span><br><span class="line">/usr/lib/systemd/system/mysqld@.service</span><br><span class="line">/usr/lib/tmpfiles.d/mysql.conf</span><br><span class="line">/usr/lib64/mysql/mecab</span><br><span class="line">/usr/lib64/mysql/mecab/dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_euc-jp/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_sjis/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/char.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/dicrc</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/left-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/matrix.bin</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/pos-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/rewrite.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/right-id.def</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/sys.dic</span><br><span class="line">/usr/lib64/mysql/mecab/dic/ipadic_utf-8/unk.dic</span><br><span class="line">/usr/lib64/mysql/mecab/etc</span><br><span class="line">/usr/lib64/mysql/mecab/etc/mecabrc</span><br><span class="line">/usr/lib64/mysql/plugin</span><br><span class="line">/usr/lib64/mysql/plugin/adt_null.so</span><br><span class="line">/usr/lib64/mysql/plugin/auth_socket.so</span><br><span class="line">/usr/lib64/mysql/plugin/authentication_ldap_sasl_client.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_audit_api_message_emit.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_filter_dragnet.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_sink_json.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_log_sink_syseventlog.so</span><br><span class="line">/usr/lib64/mysql/plugin/component_validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/connection_control.so</span><br><span class="line">/usr/lib64/mysql/plugin/ddl_rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug</span><br><span class="line">/usr/lib64/mysql/plugin/debug/adt_null.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/auth_socket.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/authentication_ldap_sasl_client.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_audit_api_message_emit.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_filter_dragnet.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_sink_json.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_log_sink_syseventlog.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/component_validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/connection_control.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ddl_rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/group_replication.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ha_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/ha_mock.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/innodb_engine.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/keyring_file.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/keyring_udf.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/libmemcached.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/libpluginmecab.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/locking_service.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/mypluglib.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/mysql_no_login.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/rewrite_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/semisync_master.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/semisync_slave.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/debug/version_token.so</span><br><span class="line">/usr/lib64/mysql/plugin/group_replication.so</span><br><span class="line">/usr/lib64/mysql/plugin/ha_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/ha_mock.so</span><br><span class="line">/usr/lib64/mysql/plugin/innodb_engine.so</span><br><span class="line">/usr/lib64/mysql/plugin/keyring_file.so</span><br><span class="line">/usr/lib64/mysql/plugin/keyring_udf.so</span><br><span class="line">/usr/lib64/mysql/plugin/libmemcached.so</span><br><span class="line">/usr/lib64/mysql/plugin/libpluginmecab.so</span><br><span class="line">/usr/lib64/mysql/plugin/locking_service.so</span><br><span class="line">/usr/lib64/mysql/plugin/mypluglib.so</span><br><span class="line">/usr/lib64/mysql/plugin/mysql_no_login.so</span><br><span class="line">/usr/lib64/mysql/plugin/rewrite_example.so</span><br><span class="line">/usr/lib64/mysql/plugin/rewriter.so</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_master.so</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_slave.so</span><br><span class="line">/usr/lib64/mysql/plugin/validate_password.so</span><br><span class="line">/usr/lib64/mysql/plugin/version_token.so</span><br><span class="line">/usr/sbin/mysqld</span><br><span class="line">/usr/sbin/mysqld-debug</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/INFO_BIN</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/INFO_SRC</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/LICENSE</span><br><span class="line">/usr/share/doc/mysql-community-server-8.0.16/README</span><br><span class="line">/usr/share/man/man1/ibd2sdi.1.gz</span><br><span class="line">/usr/share/man/man1/innochecksum.1.gz</span><br><span class="line">/usr/share/man/man1/lz4_decompress.1.gz</span><br><span class="line">/usr/share/man/man1/my_print_defaults.1.gz</span><br><span class="line">/usr/share/man/man1/myisam_ftdump.1.gz</span><br><span class="line">/usr/share/man/man1/myisamchk.1.gz</span><br><span class="line">/usr/share/man/man1/myisamlog.1.gz</span><br><span class="line">/usr/share/man/man1/myisampack.1.gz</span><br><span class="line">/usr/share/man/man1/mysql.server.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_secure_installation.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_ssl_rsa_setup.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_tzinfo_to_sql.1.gz</span><br><span class="line">/usr/share/man/man1/mysql_upgrade.1.gz</span><br><span class="line">/usr/share/man/man1/mysqldumpslow.1.gz</span><br><span class="line">/usr/share/man/man1/mysqlman.1.gz</span><br><span class="line">/usr/share/man/man1/perror.1.gz</span><br><span class="line">/usr/share/man/man1/zlib_decompress.1.gz</span><br><span class="line">/usr/share/man/man8/mysqld.8.gz</span><br><span class="line">/usr/share/mysql-8.0/dictionary.txt</span><br><span class="line">/usr/share/mysql-8.0/innodb_memcached_config.sql</span><br><span class="line">/usr/share/mysql-8.0/install_rewriter.sql</span><br><span class="line">/usr/share/mysql-8.0/mysql-log-rotate</span><br><span class="line">/usr/share/mysql-8.0/uninstall_rewriter.sql</span><br><span class="line">/var/lib/mysql</span><br><span class="line">/var/lib/mysql-files</span><br><span class="line">/var/lib/mysql-keyring</span><br><span class="line">/var/run/mysqld</span><br><span class="line">[root@root ~]#</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看端口是否开放"><a href="#查看端口是否开放" class="headerlink" title="查看端口是否开放"></a>查看端口是否开放</h2><h4 id="查看端口是否开放-1"><a href="#查看端口是否开放-1" class="headerlink" title="查看端口是否开放"></a>查看端口是否开放</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port=3306/tcp --zone=public</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回no即未开启，显示yes为已开启。"><a href="#返回no即未开启，显示yes为已开启。" class="headerlink" title="返回no即未开启，显示yes为已开启。"></a>返回no即未开启，显示yes为已开启。</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@voda ~]# firewall-cmd --query-port=3306/tcp --zone=public </span><br><span class="line">yes</span><br></pre></td></tr></table></figure>
-
-<h3 id="开启端口"><a href="#开启端口" class="headerlink" title="开启端口"></a>开启端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
-
-<h3 id="重新加载"><a href="#重新加载" class="headerlink" title="重新加载"></a>重新加载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看已经打开的端口"><a href="#查看已经打开的端口" class="headerlink" title="查看已经打开的端口"></a>查看已经打开的端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@voda ~]# firewall-cmd --query-port=3306/tcp --zone=public</span><br><span class="line">FirewallD is not running</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>说明防火墙没有开启</span><br></pre></td></tr></table></figure>
-
-<h4 id="防火墙操作命令"><a href="#防火墙操作命令" class="headerlink" title="防火墙操作命令"></a>防火墙操作命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld  #查看firewalld状态</span><br><span class="line">systemctl stop  firewalld   #停止firewalld</span><br><span class="line">systemctl start firewalld   #开启firewalld</span><br><span class="line">systemctl enable firewalld  #开机自启动</span><br><span class="line">systemctl disable firewalld #禁止自启动</span><br></pre></td></tr></table></figure>
-
 
           
         
