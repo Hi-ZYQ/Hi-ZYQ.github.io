@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="数据库的设计,数据库的备份和还原,">
 
 
 
@@ -79,13 +79,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="奋斗的牛">
-<meta property="og:url" content="http://www.plowcow.cn/tags/多表查询-事务-DCL/index.html">
+<meta name="keywords" content="数据库的设计,数据库的备份和还原">
+<meta property="og:type" content="article">
+<meta property="og:title" content="约束">
+<meta property="og:url" content="http://www.plowcow.cn/2019/10/17/约束课堂笔记/index.html">
 <meta property="og:site_name" content="奋斗的牛">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-17T07:02:43.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奋斗的牛">
+<meta name="twitter:title" content="约束">
 
 
 
@@ -115,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://www.plowcow.cn/tags/多表查询-事务-DCL/">
+  <link rel="canonical" href="http://www.plowcow.cn/2019/10/17/约束课堂笔记/">
 
 
 
 
 
-  <title>标签: 多表查询,事务,DCL | 奋斗的牛</title>
+  <title>约束 | 奋斗的牛</title>
   
 
 
@@ -140,7 +142,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,52 +248,480 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>多表查询,事务,DCL<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.plowcow.cn/2019/10/17/约束课堂笔记/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="奋斗的牛">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/cow.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的牛">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/10/17/多表查询/" itemprop="url">
-              
-                <span itemprop="name">多表查询</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">约束</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-17T14:44:55+08:00" content="2019-10-17">
-          10-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T14:44:55+08:00">
+                2019-10-17
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<a id="more"></a>
+
+<h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><ul>
+<li><p>DQL查询语句</p>
+<ul>
+<li>排序查询</li>
+<li>聚合查询</li>
+<li>分组查询</li>
+<li>分页查询</li>
+</ul>
+</li>
+<li><p>约束</p>
+</li>
+<li><p>多表之间的关系</p>
+</li>
+<li><p>范式</p>
+</li>
+<li><p>数据库的备份和还原<br>#DQL: 查询语句</p>
+</li>
+<li><p>排序查询</p>
+<ul>
+<li>语法： <code>order by</code> 子句<ul>
+<li><code>order by</code>排序字段1.排序方式1，排序字段2.排序方式2…</li>
+</ul>
+</li>
+<li>排序方式：<ul>
+<li><code>ASC</code>升序 默认的</li>
+<li><code>DESC</code>降序</li>
+</ul>
+</li>
+<li>注意如果有多个排序条件，则前边的条件值一样时，才会去判断第二条件。</li>
+</ul>
+</li>
+<li><p>聚合查询 ：将一列数据作为一个整体，进行纵向的计算，</p>
+<ul>
+<li><p><code>count</code>： 计算个数</p>
+<ul>
+<li>一般选择非空的列： “主键”</li>
+<li><code>count</code>(*)<ul>
+<li><code>max</code>：计算最大值</li>
+<li><code>min</code>:计算最小值</li>
+<li><code>sum</code>：计算和</li>
+<li><code>avg</code>：计算平均值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注意聚合函数的计算他会排除<code>null</code>值</p>
+<ul>
+<li>解决方案<ul>
+<li>第一选择不包含非空的列进行计算</li>
+<li><code>ifbull</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分组查询: </p>
+<ul>
+<li>语法：<code>group by</code> 分组列 <code>having</code> 过滤条件</li>
+<li>注意： <ul>
+<li>分组之后查询的字段：分组字段。聚合函数。</li>
+<li><code>where</code>和<code>having</code>的区别?<ul>
+<li><code>where</code>在分组之前进行鉴定,如果不满足条件,则不参与分组.<code>having</code>在分组之后进行限定,如果不满足条件,则不会被查询出来</li>
+<li><code>where</code>后不可以跟聚合函数,<code>having</code>可以进行稽核函数的判断</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分页查询:</p>
+<ul>
+<li><p>语法：<code>limit</code>开始的索引，每页查询的条数</p>
+</li>
+<li><p>公式：公式： 开始的索引 （当前的页面 - 1）*  每页显示的条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select * from stu limit 0,3; -- 第一页</span><br><span class="line">select * from stu limit 3,3; -- 第二页</span><br><span class="line">-- 公式： 开始的索引 （当前的页面 - 1）* 每页显示的条件</span><br><span class="line">select * from stu limit 6,3; -- 第三页</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>limit</code>操作是一个<code>mysql</code>方言</p>
+<h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><ul>
+<li><p>概念: 对表中的数据进行限定,保证数据的正确性,有效性和完整性.</p>
+</li>
+<li><p>分类:</p>
+<ul>
+<li><p>主键约束: <code>primary key</code></p>
+</li>
+<li><p>非空约束: <code>not null</code></p>
+</li>
+<li><p>唯一约束: <code>unique</code></p>
+</li>
+<li><p>外键约束: <code>foreign key</code></p>
+<ul>
+<li><p>非空约束: <code>not null</code></p>
+<ul>
+<li><p>在创建表时来添加约束:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table db1.stu1(</span><br><span class="line">		id int,</span><br><span class="line">		name varchar(20) not null -- name非空</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>  * 创建表完事之后添加非空约束:
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu1 MODIFY name varchar(20) not null;</span><br></pre></td></tr></table></figure>
+
+
+  * 删除非空约束:
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu1 MODIFY name VARCHAR(20);</span><br></pre></td></tr></table></figure>
+
+
+
+
+* 唯一约束: `unique`值不能重复
+
+  * 创建表时添加唯一约束
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table stu1(</span><br><span class="line">		id int,</span><br><span class="line">		phone_number VARCHAR(20) unique -- 添加唯一约束</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+  * 注意mysql中唯一约束限定的列的值可以有多个null
+
+  * 删除唯一约束
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu1 drop index phone_number;</span><br></pre></td></tr></table></figure>
+
+
+  * 创建表之后添加唯一约束
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table stu1 modify phone_number varchar(20) unique;</span><br></pre></td></tr></table></figure>
+
+
+
+
+* 主键约束: `primary key`
+
+  * 在创建表时,添加主键约束
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create table stu2(</span><br><span class="line">		id INT primary key, -- 给id添加主键</span><br><span class="line">		name varchar(20)</span><br><span class="line">);</span><br><span class="line">-- 删除主键</span><br><span class="line">-- 错误 alter table stu2 modify id int; </span><br><span class="line">alter table stu2 drop PRIMARY KEY;</span><br><span class="line">-- 创建完表之后添加主键</span><br><span class="line">alter table stu2 MODIFY id int PRIMARY KEY;</span><br><span class="line">select * from stu2;</span><br></pre></td></tr></table></figure>
+
+
+  * 自动增长:
+
+    * 如果某一列是数类型的,使用 `auto_increment` 可以来完成值自动增长
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create table stu3(</span><br><span class="line">		id INT primary key AUTO_INCREMENT, -- 给id添加主键</span><br><span class="line">		name varchar(20)</span><br><span class="line">);</span><br><span class="line">insert into stu3 (id,`name`)values(1,&apos;aaa&apos;);</span><br><span class="line">insert into stu3 (id,`name`)values(null,&apos;bbb&apos;);</span><br><span class="line">-- 注意:自动增长的值跟着上一个值动</span><br><span class="line">-- 删除自动增长</span><br><span class="line">alter table stu3 MODIFY id int;</span><br><span class="line">-- 添加自动增长</span><br><span class="line">alter table stu3 modify id int AUTO_INCREMENT;</span><br></pre></td></tr></table></figure>
+
+
+  * 注意:
+
+    * 含义:  非空且唯一
+    * 一张表只能有一个字段为主键  -- &gt;  一张表中记录的唯一标识
+
+* 外键约束: `foreign key`让表与表产生关系,保证数据的正确性.
+
+  * 在创建表时来添加外键
+
+    * 语法:
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	...</span><br><span class="line">	外键列</span><br><span class="line">    constraint 外键名称 foreign key (外键列名称) reference 主表名称(列的名称)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+    * 删除外键
+
+    * <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表的名称 drop FOREIGN key 外键名称;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    * 创建表之后添加外键
+
+      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表的名称 add constraint 外键名称 foreign key (外键列名称) reference 主表名称(列的名称)</span><br></pre></td></tr></table></figure>
+
+
+    * 级联操作
+
+      * 添加级联的操作
+
+        * 语法:
+
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表的名称 add constraint 外键名称 foreign key (外键列名称) reference 主表名称(列的名称) ON UPDATE CASCADE ON DELETE CASCADE;</span><br></pre></td></tr></table></figure>
+
+
+        * 分类:
+
+          * 级联更新:`ON UPDATE CASCADE`
+          * 级联删除:`ON DELETE CASCADE`</code></pre><h2 id="数据库的设计"><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h2><ul>
+<li>多表之间的关系<ul>
+<li>一对一:<ul>
+<li>如: 人和身份证</li>
+<li>分析:一个人只有一个身份证,一个身份证只能对应一个人</li>
+<li>实现方式:可以在任意一方添加唯一<code>unique</code>外键指向另一方的主键</li>
+</ul>
+</li>
+<li>一对多(多对一):<ul>
+<li>如部门和员工</li>
+<li>实现方式:在多的一方建立外键,指向一的一方的主键</li>
+</ul>
+</li>
+<li>多对多<ul>
+<li>如学生和课程</li>
+<li>实现方式:多对多的关系必须借助第三张中间表,中间表至少包含两个字段,这两个字段作为第三章表的外键,分别指向两张表的主键</li>
+</ul>
+</li>
+<li>小案例<br>* </li>
+</ul>
+</li>
+<li>数据库设计的范式<ul>
+<li>概念:–&gt;百度百科 </li>
+<li>分类<ul>
+<li>第一范式(1NF):即数据库表的每一列都是不可分割的原子数据项</li>
+<li>第二范式(2NF):在1NF的基础上，非码属性必须完全依赖于候选码（在1NF基础上消除非主属性对主码的部分函数依赖）<ul>
+<li>几个概念<ul>
+<li>函数依赖:A—&gt;B,如果通过A属性(属性组)的值,可以确定唯一的属性的值,则称B依赖于A<ul>
+<li>如学号被姓名所依赖</li>
+</ul>
+</li>
+<li>完全函数依赖:A—&gt;B,若果A是一个属性组,则B属性值的确定需要依赖属性组的所有属性值<ul>
+<li>(学号,课程名称)—&gt;分数</li>
+</ul>
+</li>
+<li>部分完全依赖:A—&gt;B,若果A是一个属性组.则B属性值的确定只需要依赖于A属性组中的某一些值即可<ul>
+<li>例如(学号,课程名称) —-&gt; 姓名</li>
+</ul>
+</li>
+<li>传递函数依赖:A–&gt;B,B–&gt;C,如果通过A 属性(属性组)的值,可以确定唯一,在通过B 属性组的值确定C时唯一C属性的值,则称C被传递依赖<ul>
+<li>学号–&gt;系名,系名–&gt;系主任</li>
+</ul>
+</li>
+<li>码:如果一个属性或属性组,被其他所有属性所完全依赖,则称这个属性组为该表的码<ul>
+<li>例如:(学号,课程名称)</li>
+</ul>
+</li>
+<li>主属性:码属性组中的所有属性</li>
+<li>非主属性:除过码属性组的属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三范式(3NF):在2NF基础上，任何非主<a href="https://baike.baidu.com/item/属性" target="_blank" rel="noopener">属性</a>不依赖于其它非主属性（在2NF基础上消除传递依赖）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h2><ul>
+<li>命令行:<ul>
+<li>语法:<ul>
+<li>备份:<code>mysqldump</code> -u用户名 -p密码 数据库的名称&gt; 保存的路径</li>
+<li>还原:<ul>
+<li>登录数据库</li>
+<li>创建数据库</li>
+<li>使用数据库</li>
+<li>执行文件<code>source</code>文件路径</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/WeChat.png" alt="奋斗的牛 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="奋斗的牛 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库的设计/" rel="tag"># 数据库的设计</a>
+          
+            <a href="/tags/数据库的备份和还原/" rel="tag"># 数据库的备份和还原</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/17/多表查询/" rel="next" title="多表查询">
+                <i class="fa fa-chevron-left"></i> 多表查询
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -299,6 +729,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -319,8 +753,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -392,6 +835,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#今日内容"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#约束"><span class="nav-number">1.1.</span> <span class="nav-text">约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的设计"><span class="nav-number">1.2.</span> <span class="nav-text">数据库的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的备份和还原"><span class="nav-number">1.3.</span> <span class="nav-text">数据库的备份和还原</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -546,6 +1005,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
